@@ -46,7 +46,6 @@ Each problem is organized by pattern:
 ## 🚀 Focus Areas
 
 * Pattern recognition
-* Writing code without hints
 * Improving problem-solving speed
 * Preparing for technical interviews
 
