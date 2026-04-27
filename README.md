@@ -1,31 +1,65 @@
 # DSA LeetCode Journey 🚀
 
-## Goal
-Cracking 6–10 LPA companies in 50 days
+## 🎯 Goal
 
-## Progress
+Sharpen problem-solving skills and crack 6–10 LPA software roles through structured DSA practice.
 
-### Day 0
-- Solved 5 problems
-- Pattern: Two Pointer
+---
 
-## Problems Covered
+## 📌 Approach
 
-- Two Sum II (Easy)
-- Remove Duplicates from Sorted Array (Easy)
-- Container With Most Water (Medium)
-- 3Sum (Medium)
-- Valid Palindrome (Easy)
+* Solving problems pattern-wise (not randomly)
+* Writing clean, optimized Java solutions
+* Focusing on logic building and medium-level problems
+* Maintaining consistency over perfection
 
-## Patterns
+---
 
-- [x] Two Pointer
-- [ ] Sliding Window
-- [ ] Binary Search
-- [ ] Recursion
-- [ ] Stack
-- [ ] Linked List
+## 🧠 Topics Covered
 
-## Total Count
-- Easy: 3
-- Medium: 2
+* Arrays
+* Strings
+* Two Pointer
+* Sliding Window
+* Binary Search
+* Recursion & Backtracking
+* Linked List
+* Stack & Queue
+
+---
+
+## ⚙️ Structure
+
+Each problem is organized by pattern:
+
+* Each folder represents a DSA pattern
+* Each file contains:
+
+  * Problem name
+  * Pattern used
+  * Approach explanation
+  * Time & Space complexity
+  * Clean Java implementation
+
+---
+
+## 🚀 Focus Areas
+
+* Pattern recognition
+* Writing code without hints
+* Improving problem-solving speed
+* Preparing for technical interviews
+
+---
+
+## 📈 Progress
+
+Consistently solving and improving day by day.
+
+---
+
+## 🔥 Note
+
+This repository is part of a focused preparation plan to build strong DSA fundamentals and become interview-ready.
+
+---
