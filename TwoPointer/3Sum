@@ -1,0 +1,64 @@
+// Problem: 3Sum
+// Pattern: Two Pointer + Sorting
+// Difficulty: Medium
+
+// Intuition:
+// We need to find all unique triplets whose sum = 0.
+// Brute force (3 loops) = O(n^3) ❌
+// Optimized approach: sort + fix one element + two pointer
+
+// Approach:
+// 1. Sort the array
+// 2. Fix one element (i)
+// 3. Use two pointers (l = i+1, r = end)
+// 4. Calculate sum = nums[i] + nums[l] + nums[r]
+//    - If sum == 0 → add triplet
+//    - If sum > 0 → decrease r
+//    - If sum < 0 → increase l
+// 5. Skip duplicates:
+//    - Skip same i values
+//    - Skip same l and r values after finding a triplet
+
+// Time Complexity: O(n^2)
+// Space Complexity: O(1) (excluding result list)
+
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+
+        Arrays.sort(nums); // Step 1: sort array
+
+        for (int i = 0; i < nums.length - 2; i++) {
+
+            // Skip duplicate values for i
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+
+            int l = i + 1;
+            int r = nums.length - 1;
+
+            while (l < r) {
+                int sum = nums[i] + nums[l] + nums[r];
+
+                if (sum == 0) {
+                    res.add(Arrays.asList(nums[i], nums[l], nums[r]));
+
+                    l++;
+                    r--;
+
+                    // Skip duplicates for left pointer
+                    while (l < r && nums[l] == nums[l - 1]) l++;
+
+                    // Skip duplicates for right pointer
+                    while (l < r && nums[r] == nums[r + 1]) r--;
+                }
+                else if (sum > 0) {
+                    r--; // decrease sum
+                }
+                else {
+                    l++; // increase sum
+                }
+            }
+        }
+        return res;
+    }
+}
