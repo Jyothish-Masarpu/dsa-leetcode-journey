@@ -1,20 +1,5 @@
 # DSA LeetCode Journey 🚀
 
-## 🎯 Goal
-
-Sharpen problem-solving skills and crack 6–10 LPA software roles through structured DSA practice.
-
----
-
-## 📌 Approach
-
-* Solving problems pattern-wise (not randomly)
-* Writing clean, optimized Java solutions
-* Focusing on logic building and medium-level problems
-* Maintaining consistency over perfection
-
----
-
 ## 🧠 Topics Covered
 
 * Arrays
@@ -48,17 +33,5 @@ Each problem is organized by pattern:
 * Pattern recognition
 * Improving problem-solving speed
 * Preparing for technical interviews
-
----
-
-## 📈 Progress
-
-Consistently solving and improving day by day.
-
----
-
-## 🔥 Note
-
-This repository is part of a focused preparation plan to build strong DSA fundamentals and become interview-ready.
 
 ---
