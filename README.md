@@ -2,15 +2,9 @@
 
 ## 🧠 Topics Covered
 
-* Arrays
-* Strings
 * Two Pointer
 * Sliding Window
-* Binary Search
-* Recursion & Backtracking
-* Linked List
-* Stack & Queue
-
+* 
 ---
 
 ## ⚙️ Structure
