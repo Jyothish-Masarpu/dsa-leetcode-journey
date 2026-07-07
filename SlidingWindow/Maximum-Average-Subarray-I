@@ -1,0 +1,34 @@
+// LeetCode 643 - Maximum Average Subarray I
+// Pattern: Fixed Size Sliding Window
+
+// Brute Force:
+// Find the sum of every subarray of size k.
+// Calculate the average and keep the maximum.
+// Time: O(n * k)
+
+// Optimal:
+// Find the sum of the first window of size k.
+// Slide the window by:
+// 1. Adding the new element.
+// 2. Removing the leftmost element.
+// Keep track of the maximum window sum.
+
+// Time: O(n)
+// Space: O(1)
+
+class Solution {
+    public double findMaxAverage(int[] nums, int k) {
+        int sum = 0;
+        // First window
+        for (int i = 0; i < k; i++) {
+            sum += nums[i];
+        }
+        int maxSum = sum;
+        // Slide the window
+        for (int i = k; i < nums.length; i++) {
+            sum += nums[i] - nums[i - k];
+            maxSum = Math.max(maxSum, sum);
+        }
+        return (double) maxSum / k;
+    }
+}
