@@ -1,0 +1,41 @@
+// LeetCode 209 - Minimum Size Subarray Sum
+// Pattern: Sliding Window
+
+// Brute Force:
+// Start from every index and keep adding elements until
+// the sum becomes >= target.
+// Update the minimum length.
+// Time: O(n²)
+
+// Optimal:
+// Since all numbers are positive, use a sliding window.
+// Keep expanding the window by moving 'right'.
+// Once the sum becomes >= target,
+// keep shrinking from the left to get the smallest valid window.
+
+// Steps:
+// 1. Add nums[right] to sum.
+// 2. If sum >= target:
+//      - Update answer.
+//      - Remove nums[left].
+//      - Move left.
+// 3. Repeat until the end.
+
+// Time: O(n)
+// Space: O(1)
+
+class Solution {
+    public int minSubArrayLen(int target, int[] nums) {
+        int left = 0, sum = 0;
+        int min = Integer.MAX_VALUE;
+        for (int right = 0; right < nums.length; right++) {
+            sum += nums[right];
+            while (sum >= target) {
+                min = Math.min(min, right - left + 1);
+                sum -= nums[left];
+                left++;
+            }
+        }
+        return min == Integer.MAX_VALUE ? 0 : min;
+    }
+}
