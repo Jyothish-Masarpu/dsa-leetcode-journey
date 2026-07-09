@@ -1,0 +1,46 @@
+// Problem: Permutation in String (LeetCode 567)
+// Pattern: Fixed Size Sliding Window + Frequency Array
+// Difficulty: Medium
+
+// Intuition:
+// We need to check whether s2 contains any permutation of s1.
+// Since every permutation has the same length as s1,
+// maintain a fixed-size sliding window of length s1.length().
+// Compare the frequency of characters in the current window
+// with the frequency of characters in s1.
+
+// Approach:
+// 1. Create a frequency array for s1.
+// 2. Create another frequency array for the current window in s2.
+// 3. Expand the window by adding the right character.
+// 4. If the window size exceeds s1.length(),
+//    remove the left character and move left forward.
+// 5. Compare both frequency arrays.
+// 6. If they match, return true.
+// 7. If no window matches, return false.
+
+// Time Complexity: O(n)
+// Space Complexity: O(1)   // 26 lowercase English letters
+
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        if (s1.length() > s2.length())
+            return false;
+        int[] need = new int[26];
+        int[] window = new int[26];
+        for (char c : s1.toCharArray())
+            need[c - 'a']++;
+        int left = 0;
+        for (int right = 0; right < s2.length(); right++) {
+            window[s2.charAt(right) - 'a']++;
+            if (right - left + 1 > s1.length()) {
+                window[s2.charAt(left) - 'a']--;
+                left++;
+            }
+            if (Arrays.equals(need, window))
+                return true;
+        }
+
+        return false;
+    }
+}
