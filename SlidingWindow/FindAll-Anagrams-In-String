@@ -1,0 +1,43 @@
+// Problem: Find All Anagrams in a String (LeetCode 438)
+// Pattern: Fixed Size Sliding Window + Frequency Array
+// Difficulty: Medium
+
+// Intuition:
+// We need to find all starting indices where an anagram of p
+// appears in s. Every anagram has the same length as p,
+// so use a fixed-size sliding window of length p.length().
+// Compare the window's character frequencies with p's frequencies.
+
+// Approach:
+// 1. Create a frequency array for pattern p.
+// 2. Create another frequency array for the current window.
+// 3. Expand the window by adding the right character.
+// 4. If the window size exceeds p.length(),
+//    remove the left character and move left forward.
+// 5. Compare both frequency arrays.
+// 6. If they match, add the current left index to the answer.
+// 7. Continue until the end of the string.
+
+// Time Complexity: O(n)
+// Space Complexity: O(1)   // 26 lowercase English letters
+
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> ans = new ArrayList<>();
+        if (p.length() > s.length())  return ans;
+        int[] need = new int[26];
+        int[] window = new int[26];
+        for (char c : p.toCharArray())  need[c - 'a']++;
+        int left = 0;
+        for (int right = 0; right < s.length(); right++) {
+            window[s.charAt(right) - 'a']++;
+            if (right - left + 1 > p.length()) {
+                window[s.charAt(left) - 'a']--;
+                left++;
+            }
+            if (Arrays.equals(need, window))
+                ans.add(left);
+        }
+        return ans;
+    }
+}
