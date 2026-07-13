@@ -1,0 +1,35 @@
+// Problem: Two Sum (LeetCode 1)
+// Pattern: HashMap (Value → Index)
+// Difficulty: Easy
+
+// Intuition:
+// We need to find two numbers whose sum equals the target.
+// Brute force checks every pair in O(n²).
+// Instead, store each number with its index in a HashMap.
+// For every number, check if its complement (target - current)
+// has already been seen.
+
+// Approach:
+// 1. Create a HashMap to store number → index.
+// 2. Traverse the array.
+// 3. Compute complement = target - nums[i].
+// 4. If complement exists in the map, return its index and current index.
+// 5. Otherwise, store the current number and its index.
+// 6. Continue until the answer is found.
+
+// Time Complexity: O(n)
+// Space Complexity: O(n)
+
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer,Integer> map=new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            int complement=target-nums[i];
+            if(map.containsKey(complement)){
+                return new int[]{map.get(complement),i};
+            }
+            map.put(nums[i],i);
+        }
+        return new int[]{0};
+    }
+}
