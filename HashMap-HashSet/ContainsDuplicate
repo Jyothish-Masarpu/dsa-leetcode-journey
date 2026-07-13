@@ -1,0 +1,29 @@
+// Problem: Contains Duplicate (LeetCode 217)
+// Pattern: HashSet
+// Difficulty: Easy
+
+// Intuition:
+// We need to determine whether any element appears more than once.
+// A HashSet stores only unique elements.
+// If adding an element fails, it means the element already exists,
+// so a duplicate has been found.
+
+// Approach:
+// 1. Create a HashSet.
+// 2. Traverse the array.
+// 3. Try to add each element into the set.
+// 4. If add() returns false, return true.
+// 5. If traversal finishes, return false.
+
+// Time Complexity: O(n)
+// Space Complexity: O(n)
+
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        Set<Integer> set=new HashSet<>();
+        for(int i:nums){
+            if(!set.add(i)) return true;
+        }
+        return false;
+    }
+}
