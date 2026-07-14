@@ -1,0 +1,51 @@
+// Problem: Longest Consecutive Sequence (LeetCode 128)
+// Pattern: HashSet
+// Difficulty: Medium
+
+// Intuition:
+// We need to find the length of the longest sequence of
+// consecutive numbers. Sorting would take O(n log n),
+// but using a HashSet allows O(1) average lookup.
+// Start counting only from numbers that are the beginning
+// of a sequence (i.e., the previous number doesn't exist).
+
+// Approach:
+// 1. Insert all numbers into a HashSet for fast lookup.
+// 2. Traverse each unique number in the set.
+// 3. If (num - 1) is not present, then num is the start
+//    of a new consecutive sequence.
+// 4. Keep checking if (current + 1) exists.
+// 5. Count the sequence length.
+// 6. Update the maximum length found.
+
+// Time Complexity: O(n)
+// Each number is visited at most once.
+
+// Space Complexity: O(n)
+// HashSet stores all unique elements.
+
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        // Store all numbers
+        for (int i : nums) {
+            set.add(i);
+        }
+        int longest = 0;
+        // Traverse unique numbers
+        for (int i : set) {
+            // Start only if it is the beginning of a sequence
+            if (!set.contains(i - 1)) {
+                int curr = i;
+                int length = 1;
+                // Count consecutive numbers
+                while (set.contains(curr + 1)) {
+                    curr++;
+                    length++;
+                }
+                longest = Math.max(longest, length);
+            }
+        }
+        return longest;
+    }
+}
