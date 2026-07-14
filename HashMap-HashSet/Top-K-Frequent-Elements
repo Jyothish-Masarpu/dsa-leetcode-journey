@@ -1,0 +1,51 @@
+// Problem: Top K Frequent Elements (LeetCode 347)
+// Pattern: HashMap + Priority Queue (Max Heap)
+// Difficulty: Medium
+
+// Intuition:
+// We need to find the k elements with the highest frequencies.
+// First, count the frequency of each element using a HashMap.
+// Then, use a Max Heap (PriorityQueue) to keep elements ordered
+// by their frequencies. Finally, remove the top k elements.
+
+// Approach:
+// 1. Create a HashMap to store the frequency of each number.
+// 2. Traverse the array and update frequencies using getOrDefault().
+// 3. Create a Max Heap using a custom comparator:
+//      (a, b) -> map.get(b) - map.get(a)
+//    This ensures elements with higher frequencies come first.
+// 4. Add all unique elements (map.keySet()) into the heap.
+// 5. Remove the top k elements from the heap and store them.
+// 6. Return the resulting array.
+
+// Time Complexity: O(n + m log m)
+// n = size of nums
+// m = number of unique elements
+//
+// Building HashMap  : O(n)
+// Building Max Heap : O(m log m)
+// Extracting k elems: O(k log m)
+
+// Space Complexity: O(m)
+// m = number of unique elements
+
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        // Count frequencies
+        for (int i : nums) {
+            map.put(i, map.getOrDefault(i, 0) + 1);
+        }
+        // Max Heap based on frequency
+        PriorityQueue<Integer> pq =
+                new PriorityQueue<>((a, b) -> map.get(b) - map.get(a));
+        // Add all unique elements
+        pq.addAll(map.keySet());
+        int[] res = new int[k];
+        // Extract top k frequent elements
+        for (int i = 0; i < k; i++) {
+            res[i] = pq.poll();
+        }
+        return res;
+    }
+}
