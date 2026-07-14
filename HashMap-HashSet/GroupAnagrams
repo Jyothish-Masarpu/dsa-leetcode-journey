@@ -1,0 +1,42 @@
+// Problem: Group Anagrams (LeetCode 49)
+// Pattern: HashMap + Sorting
+// Difficulty: Medium
+
+// Intuition:
+// Two strings are anagrams if they contain the same characters
+// with the same frequencies. If we sort the characters of each
+// string, all anagrams will produce the same sorted string.
+// Use this sorted string as the key in a HashMap.
+
+// Approach:
+// 1. Create a HashMap where:
+//      Key   = Sorted version of the string
+//      Value = List of all strings having that sorted key.
+// 2. For each string:
+//      - Convert it into a character array.
+//      - Sort the character array.
+//      - Convert it back into a String (key).
+//      - If the key doesn't exist, create a new list.
+//      - Add the original string to the corresponding list.
+// 3. Return all the values of the HashMap.
+
+// Time Complexity: O(n × k log k)
+// n = number of strings
+// k = average length of each string
+// (Sorting each string takes O(k log k))
+
+// Space Complexity: O(n × k)
+
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
+        for (String s : strs) {
+            char[] c = s.toCharArray();
+            Arrays.sort(c);
+            String key = new String(c);
+            map.putIfAbsent(key, new ArrayList<>());
+            map.get(key).add(s);
+        }
+        return new ArrayList<>(map.values());
+    }
+}
