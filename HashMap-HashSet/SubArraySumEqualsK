@@ -1,0 +1,62 @@
+// Problem: Subarray Sum Equals K (LeetCode 560)
+// Pattern: HashMap + Prefix Sum
+// Difficulty: Medium
+
+// Intuition:
+// We need to count the number of subarrays whose sum is exactly k.
+// Instead of checking every subarray, we use a prefix sum.
+//
+// If current prefix sum is sum, then we need an earlier prefix sum:
+//     sum - previousSum = k
+//
+// Therefore:
+//     previousSum = sum - k
+//
+// We store prefix sums and their frequencies in a HashMap.
+// If sum - k already exists, its frequency tells us how many
+// subarrays ending at the current index have sum equal to k.
+
+// Approach:
+// 1. Create a HashMap to store prefixSum -> frequency.
+// 2. Put (0, 1) initially because a prefix sum of 0 exists once.
+// 3. Traverse the array and maintain the running prefix sum.
+// 4. Calculate (sum - k).
+// 5. If (sum - k) exists in the map, add its frequency to count.
+// 6. Store the current prefix sum in the HashMap.
+// 7. Return the count.
+
+// Time Complexity: O(n)
+// Each element is processed once.
+//
+// Space Complexity: O(n)
+// HashMap can store up to n different prefix sums.
+
+import java.util.*;
+
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        // Prefix sum 0 occurs once
+        map.put(0, 1);
+
+        int sum = 0;
+        int count = 0;
+
+        for (int num : nums) {
+
+            sum += num;
+
+            // Need previous prefix sum = sum - k
+            if (map.containsKey(sum - k)) {
+                count += map.get(sum - k);
+            }
+
+            // Store current prefix sum
+            map.put(sum, map.getOrDefault(sum, 0) + 1);
+        }
+
+        return count;
+    }
+}
