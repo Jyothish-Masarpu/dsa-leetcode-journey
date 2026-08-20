@@ -1,0 +1,73 @@
+// Problem: Subarray Sums Divisible by K (LeetCode 974)
+// Pattern: HashMap + Prefix Sum + Remainder
+// Difficulty: Medium
+
+// Intuition:
+// We need to count subarrays whose sum is divisible by k.
+//
+// If two prefix sums have the same remainder when divided by k,
+// then their difference is divisible by k.
+//
+// Example:
+//     prefix1 % k = 2
+//     prefix2 % k = 2
+//
+// Therefore:
+//     (prefix2 - prefix1) % k = 0
+//
+// So we store the remainder of each prefix sum in a HashMap.
+// The frequency of a remainder tells us how many previous
+// prefix sums can form a valid subarray with the current sum.
+
+// Approach:
+// 1. Create a HashMap to store remainder -> frequency.
+// 2. Put (0, 1) initially because remainder 0 occurs once.
+// 3. Traverse the array and maintain the running prefix sum.
+// 4. Calculate sum % k.
+// 5. If the remainder is negative, add k to make it positive.
+// 6. If the remainder already exists, add its frequency to count.
+// 7. Store the current remainder in the HashMap.
+// 8. Return the count.
+
+// Time Complexity: O(n)
+// Each element is processed once.
+//
+// Space Complexity: O(n)
+// HashMap stores the prefix sum remainders.
+
+import java.util.*;
+
+class Solution {
+    public int subarraysDivByK(int[] nums, int k) {
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        // Remainder 0 occurs once initially
+        map.put(0, 1);
+
+        int sum = 0;
+        int count = 0;
+
+        for (int num : nums) {
+
+            sum += num;
+
+            int rem = sum % k;
+
+            // Handle negative remainder
+            if (rem < 0) {
+                rem += k;
+            }
+
+            // Same remainder means subarray sum is divisible by k
+            if (map.containsKey(rem)) {
+                count += map.get(rem);
+            }
+
+            // Store current remainder
+            map.put(rem, map.getOrDefault(rem, 0) + 1);
+        }
+
+        return count;
+    }
+}
