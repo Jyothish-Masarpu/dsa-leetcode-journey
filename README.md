@@ -5,6 +5,7 @@
 * Two Pointer
 * Sliding Window
 * HashMap/Set
+* BinarySearch
 ---
 
 ## ⚙️ Structure
