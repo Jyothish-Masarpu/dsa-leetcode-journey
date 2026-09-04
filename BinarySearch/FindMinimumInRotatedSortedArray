@@ -1,0 +1,38 @@
+// Problem: Find Minimum in Rotated Sorted Array (LeetCode 153)
+// Pattern: Binary Search
+// Difficulty: Medium
+
+// Intuition:
+// In a rotated sorted array, one half is always sorted.
+// The first element of a sorted half is its minimum.
+// Keep checking both possible halves and store the smallest value.
+
+// Approach:
+// 1. Find the middle element.
+// 2. If the left half is sorted, nums[left] is its minimum.
+// 3. Store nums[left] and search the right half.
+// 4. Otherwise, the minimum lies in the left half including mid.
+// 5. Store nums[mid] and search the left half.
+// 6. Return the smallest value found.
+
+// Time Complexity: O(log n)
+// Space Complexity: O(1)
+
+class Solution {
+    public int findMin(int[] nums) {
+        int left=0,right=nums.length-1;
+        int ans=Integer.MAX_VALUE;
+        while(left<=right){
+            int mid=left+(right-left)/2;
+            if(nums[left]<=nums[mid]){
+                ans=Math.min(ans,nums[left]);
+                left=mid+1;
+            }
+            else{
+                ans=Math.min(ans,nums[mid]);
+                right=mid-1;
+            }
+        }
+        return ans;
+    }
+}
