@@ -1,0 +1,48 @@
+// Problem: Koko Eating Bananas (LeetCode 875)
+// Pattern: Binary Search on Answer
+// Difficulty: Medium
+
+// Intuition:
+// Koko can eat between 1 and the maximum pile size bananas per hour.
+// Binary Search is used to find the minimum eating speed that allows her
+// to finish all piles within h hours.
+
+// Approach:
+// 1. Set the search range from 1 to the maximum pile size.
+// 2. Calculate the middle eating speed.
+// 3. Check whether all piles can be eaten within h hours at that speed.
+// 4. If she can finish, store the speed and search for a smaller speed.
+// 5. Otherwise, search for a larger speed.
+// 6. Return the minimum valid eating speed.
+
+// Time Complexity: O(n log m), where m is the maximum pile size
+// Space Complexity: O(1)
+
+class Solution {
+    public int minEatingSpeed(int[] piles, int h) {
+        int left=1,right=0;
+        for(int pile : piles){
+            right=Math.max(right,pile);
+        }
+        int ans=right;
+        while(left<=right){
+            int mid=left+(right-left)/2;
+            if(caneatpiles(piles,mid,h)){
+                ans=mid;
+                right=mid-1;
+            }
+            else{
+                left=mid+1;
+            }
+        }
+        return ans;
+    }
+    private static boolean caneatpiles(int[] piles,int hour,int k){
+        long totalhours=0;
+        for(int pile : piles){
+            totalhours+=(pile-1)/hour+1;
+        }
+        if(totalhours<=k) return true;
+        return false;
+    }
+}
