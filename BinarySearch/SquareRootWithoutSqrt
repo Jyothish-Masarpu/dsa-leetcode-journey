@@ -1,0 +1,22 @@
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        double n = sc.nextDouble();
+        double low = 0;
+        double high = n;
+        if (n < 1) {
+            high = 1;
+        }
+        double eps = 0.000001;
+        while (high - low > eps) {
+            double mid = low + (high - low) / 2;
+            if (mid * mid < n) {
+                low = mid;
+            } else {
+                high = mid;
+            }
+        }
+        System.out.println(low);
+    }
+}
