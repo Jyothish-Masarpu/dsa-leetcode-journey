@@ -1,0 +1,33 @@
+// Problem: Delete the Middle Node of a Linked List (LeetCode 2095)
+// Pattern: Fast and Slow Pointers
+// Difficulty: Medium
+
+// Intuition:
+// Use two pointers, slow and fast.
+// Slow moves one step at a time, while fast moves two steps.
+// When fast reaches the end, slow will be just before the middle node.
+
+// Approach:
+// 1. Handle the single-node list separately.
+// 2. Initialize slow at the head and fast at the slow.next.next(because should stop before the mid).
+// 3. Move slow one step and fast two steps.
+// 4. Continue until fast reaches the end.
+// 5. slow will point to the node before the middle node.
+// 6. Skip the middle node using slow.next = slow.next.next.
+// 7. Return head.
+
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+class Solution {
+    public ListNode deleteMiddle(ListNode head) {
+        if(head.next==null) return null;
+        ListNode slow=head;
+        ListNode fast=slow.next.next;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        slow.next=slow.next.next;
+        return head;
+    }
+}
