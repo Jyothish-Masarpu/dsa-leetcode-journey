@@ -1,0 +1,30 @@
+// Problem: Middle of the Linked List (LeetCode 876)
+// Pattern: Fast and Slow Pointers
+// Difficulty: Easy
+
+// Intuition:
+// Use two pointers, slow and fast.
+// Slow moves one step at a time, while fast moves two steps.
+// When fast reaches the end, slow will be at the middle.
+
+// Approach:
+// 1. Initialize slow and fast at the head.
+// 2. Move slow one step and fast two steps.
+// 3. Continue until fast reaches the end.
+// 4. Return slow, which points to the middle node.
+// 5. For an even-sized list, return the second middle node.
+
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        ListNode fast=head;
+        ListNode slow=fast;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        return slow;
+    }
+}
