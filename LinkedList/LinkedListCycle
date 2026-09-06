@@ -1,0 +1,33 @@
+// Problem: Linked List Cycle (LeetCode 141)
+// Pattern: Fast and Slow Pointers
+// Difficulty: Easy
+
+// Intuition:
+// Use two pointers, slow and fast.
+// Slow moves one step at a time, while fast moves two steps.
+// If a cycle exists, both pointers will eventually meet.
+
+// Approach:
+// 1. Initialize slow and fast at the head.
+// 2. Move slow one step and fast two steps.
+// 3. If slow and fast meet, a cycle exists.
+// 4. If fast reaches null, no cycle exists.
+// 5. Return false.
+
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        ListNode slow=head;
+        ListNode fast=head;
+        while(fast!=null && fast.next!=null){
+            fast=fast.next.next;
+            slow=slow.next;
+            if(slow==fast){
+                return true;
+            }
+        }
+        return false;
+    }
+}
