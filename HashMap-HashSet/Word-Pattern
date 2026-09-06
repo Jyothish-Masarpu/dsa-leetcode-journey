@@ -1,0 +1,41 @@
+// Problem: Word Pattern (LeetCode 290)
+// Pattern: HashMap / Bidirectional Mapping
+// Difficulty: Easy
+
+// Intuition:
+// Maintain a one-to-one mapping between pattern characters and words.
+// Use two HashMaps to ensure both character → word and word → character
+// mappings are consistent.
+
+// Approach:
+// 1. Split the string into individual words.
+// 2. If the number of words and pattern characters are different, return false.
+// 3. Use one HashMap for character → word mapping.
+// 4. Use another HashMap for word → character mapping.
+// 5. For each character and word pair, check whether an existing mapping conflicts.
+// 6. Store both mappings.
+// 7. If no conflict is found, return true.
+
+// Time Complexity: O(n)
+// Space Complexity: O(n)
+
+class Solution {
+    public boolean wordPattern(String pattern, String s) {
+        String[] words=s.split(" ");
+        if(words.length!=pattern.length()) return false;
+        HashMap<Character,String> charmap = new HashMap<>();
+        HashMap<String,Character> wordmap = new HashMap<>();
+        for(int i=0;i<pattern.length();++i){
+            char ch=pattern.charAt(i);
+            if(charmap.containsKey(ch) && !charmap.get(ch).equals(words[i])) {
+                return false;
+            }
+            if(wordmap.containsKey(words[i]) && !wordmap.get(words[i]).equals(ch)){
+                return false;
+            }
+            wordmap.put(words[i],ch);
+            charmap.put(ch,words[i]);
+        }
+        return true;
+    }
+}
