@@ -1,0 +1,32 @@
+// Problem: Reverse Linked List (LeetCode 206)
+// Pattern: Iterative Linked List Reversal
+// Difficulty: Easy
+
+// Intuition:
+// Reverse the direction of each nodes next pointer.
+// Use three pointers: prev, curr, and next.
+
+// Approach:
+// 1. Initialize prev as null and curr as head.
+// 2. Store the next node before changing curr.next.
+// 3. Point curr.next to prev.
+// 4. Move prev and curr one step forward.
+// 5. Continue until curr becomes null.
+// 6. Return prev, which becomes the new head.
+
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode prev=null;
+        ListNode curr=head;
+        while(curr!=null){
+            ListNode next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        return prev;
+    }
+}
