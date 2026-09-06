@@ -1,0 +1,60 @@
+// Problem: Remove Nth Node From End of List (LeetCode 19)
+// Pattern: Fast and Slow Pointers
+// Difficulty: Medium
+
+// Intuition:
+// Use two pointers, slow and fast.
+// There are two approaches: without a dummy node and with a dummy node.
+
+// Approach 1: Without Dummy Node
+// 1. Initialize slow and fast at the head.
+// 2. Move fast n steps ahead.
+// 3. If fast becomes null, delete the head.
+// 4. Move both pointers until fast reaches the last node.
+// 5. Delete the node after slow.
+
+// Approach 2: With Dummy Node
+// 1. Create a dummy node before the head.
+// 2. Initialize slow and fast at the dummy node.
+// 3. Move fast n+1 steps ahead.
+// 4. Move both pointers until fast becomes null.
+// 5. Delete the node after slow.
+// 6. Return dummy.next.
+
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode slow=head;
+        ListNode fast=head;
+        for(int i=0;i<n;i++){
+            fast=fast.next;
+        }
+        if(fast==null) return head.next;
+        while(fast.next!=null){
+            fast=fast.next;
+            slow=slow.next;
+        }
+        slow.next=slow.next.next;
+        return head;
+    }
+}
+
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy=new ListNode(0);
+        dummy.next=head;
+        ListNode slow=dummy;
+        ListNode fast=dummy;
+        for(int i=0;i<=n;i++){
+            fast=fast.next;
+        }
+        while(fast!=null){
+            fast=fast.next;
+            slow=slow.next;
+        }
+        slow.next=slow.next.next;
+        return dummy.next;
+    }
+}
