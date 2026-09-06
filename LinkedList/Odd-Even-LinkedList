@@ -1,0 +1,36 @@
+// Problem: Odd Even Linked List (LeetCode 328)
+// Pattern: Linked List
+// Difficulty: Medium
+
+// Intuition:
+// Rearrange the linked list by grouping all nodes at odd positions first,
+// followed by all nodes at even positions.
+
+// Approach:
+// 1. Initialize odd at the head and even at the second node.
+// 2. Store the head of the even list.
+// 3. Connect odd nodes together using odd.next.
+// 4. Connect even nodes together using even.next.
+// 5. Continue until there are no more even nodes to process.
+// 6. Attach the even list after the odd list.
+// 7. Return head.
+
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+
+class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        if(head==null) return null;
+        ListNode odd=head;
+        ListNode even=odd.next;
+        ListNode evenhead=even;
+        while(even!=null && even.next!=null){
+            odd.next=even.next;
+            odd=odd.next;
+            even.next=odd.next;
+            even=even.next;
+        }
+        odd.next=evenhead;
+        return head;
+    }
+}
