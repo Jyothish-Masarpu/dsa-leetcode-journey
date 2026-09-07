@@ -1,0 +1,50 @@
+// Problem: Palindrome Linked List (LeetCode 234)
+// Pattern: Fast and Slow Pointers + Linked List Reversal
+// Difficulty: Easy
+
+// Intuition:
+// Find the middle of the linked list using slow and fast pointers.
+// Reverse the second half and compare it with the first half.
+
+// Approach:
+// 1. Initialize slow and fast at the head.
+// 2. Move slow one step and fast two steps to find the middle.
+// 3. Reverse the second half of the linked list.
+// 4. Compare the reversed second half with the original first half.
+// 5. If any values differ, return false.
+// 6. If all values match, return true.
+
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        ListNode slow=head;
+        ListNode fast=head;
+        while(fast!=null && fast.next!=null){
+            fast=fast.next.next;
+            slow=slow.next;
+        }
+        ListNode rev=reverse(slow);
+        ListNode org=head;
+        while(rev!=null){
+            if(org.val!=rev.val){
+                return false;
+            }
+            org=org.next;
+            rev=rev.next;
+        }
+        return true;
+    }
+    private static ListNode reverse(ListNode head){
+        ListNode prev=null;
+        ListNode curr=head;
+        while(curr!=null){
+            ListNode next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        return prev;
+    }
+}
