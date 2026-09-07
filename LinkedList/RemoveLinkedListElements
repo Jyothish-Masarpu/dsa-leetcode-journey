@@ -1,0 +1,32 @@
+// Problem: Remove Linked List Elements (LeetCode 203)
+// Pattern: Linked List / Dummy Node
+// Difficulty: Easy
+
+// Intuition:
+// Use a dummy node before the head to handle deletion of the head node
+// and other nodes uniformly.
+
+// Approach:
+// 1. Create a dummy node pointing to the head.
+// 2. Use temp to traverse the linked list.
+// 3. If temp.next contains the target value, skip that node.
+// 4. Keep checking temp.next so consecutive target nodes are also removed.
+// 5. Move temp forward when no deletion is needed.
+// 6. Return dummy.next as the new head.
+
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+
+class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        ListNode dummy=new ListNode(0,head);
+        ListNode temp=dummy;
+        while(temp!=null){
+            while(temp.next!=null && temp.next.val==val){
+                temp.next=temp.next.next;
+            }
+            temp=temp.next;
+        }
+        return dummy.next;  
+    }
+}
