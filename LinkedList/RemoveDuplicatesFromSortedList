@@ -1,0 +1,35 @@
+// Problem: Remove Duplicates from Sorted List (LeetCode 83)
+// Pattern: Linked List
+// Difficulty: Easy
+
+// Intuition:
+// Since the linked list is sorted, duplicate values will always be next to each other.
+// Compare the current node with the next node and skip the next node when they are equal.
+
+// Approach:
+// 1. Initialize temp at the head.
+// 2. Compare temp.val with temp.next.val.
+// 3. If they are equal, skip the duplicate node using temp.next = temp.next.next.
+// 4. Do not move temp when a duplicate is removed, because there may be more duplicates.
+// 5. If values are different, move temp to the next node.
+// 6. Continue until temp.next becomes null.
+// 7. Return head.
+
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        if(head==null) return null;
+        ListNode temp=head;
+        while(temp.next!=null){
+            if(temp.val==temp.next.val){
+                temp.next=temp.next.next;
+            }
+            else{
+                temp=temp.next;
+            }
+        }
+        return head;
+    }
+}
